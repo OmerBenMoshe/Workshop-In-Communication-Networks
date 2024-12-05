@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -libverbs
+TARGET_SERVER = server
+TARGET_CLIENT = client
+SOURCE = bw_template.c
+
+all: $(TARGET_SERVER) $(TARGET_CLIENT)
+
+$(TARGET_SERVER): $(SOURCE)
+	$(CC) $(CFLAGS) $(SOURCE) -libverbs -o $(TARGET_SERVER)
+
+$(TARGET_CLIENT): $(TARGET_SERVER)
+	ln -sf $(TARGET_SERVER) $(TARGET_CLIENT)
+
+clean:
+	rm -f $(TARGET_SERVER) $(TARGET_CLIENT)
+
